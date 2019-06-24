@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<title>Save Subject</title>
+
+	</head>
+
+	<body>
+
+		<div id="wrapper">
+			<div id="header">
+				<h2>SRM - Subject Relationship Manager</h2>
+			</div>
+		</div>
+
+		<div id="container">
+			<h3>Save Customer</h3>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <table>
+                    {{ form }}
+                </table>
+                <input type="submit" value="Save Subject">
+            </form>
+
+			<div style="clear; both;"></div>
+
+			<p>
+				<a href="${pageContext.request.contextPath}/customer/list">Back to List</a>
+			</p>
+		</div>
+	</body>
+</html>

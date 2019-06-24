@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+<html>
+
+<head>
+	<title>Subjects List</title>
+</head>
+
+
+<body>
+
+	<div id="wrapper">
+		<div id="header">
+			<h2>SRM - Subject Relationship Manager</h2>
+		</div>
+	</div>
+	
+	<div id="container">
+		<div id="content">
+			
+			<!-- put new button: add customer-->
+			<input type="button" value="Add Subject"
+				   onclick="window.location.href='showFormForAdd'; return false;"
+				   class="add-button"/>
+				   
+			<!-- add out html table here-->
+			
+			<table>
+				<tr>
+					<th>Subject_Id</th>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Created_Time</th>
+                    <th>Operations</th>
+				</tr>
+				
+				<!-- loop over and print out subject -->
+
+                {% for subject in subject_list%}
+                    <tr>
+						<td>{{subject.subject_id}}</td>
+						<td>{{subject.name}}</td>
+						<td>{{subject.description}}</td>
+                        <td>{{subject.created}}</td>
+						<td>
+							<!--display the update link-->
+							<a href="{% url 'show_subject_update' %}">Update</a>
+							|
+							<a href="{% url 'show_subjects' %}"
+							   onclick="if(!(confirm('Are you sure you want to delete this customer?'))) return false">Delete</a>
+						</td>
+					</tr>
+                {% endfor %}
+
+			</table>
+		</div>
+	</div>
+</body>
+</html>
