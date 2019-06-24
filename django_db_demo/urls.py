@@ -13,11 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import re_path
-from django_db_demo.view.views import show_subjects, show_delete_subject, show_add_subject_form
+from django.urls import re_path, path
+from django_db_demo.view.views import subjects_list, show_delete_subject, add_subject_form
 
 urlpatterns = [
-    re_path(r'^subjects/$', show_subjects),
-    re_path(r'^delete_subject/$', show_delete_subject),
-    re_path(r'^create_new_subject/$', show_add_subject_form)
+    re_path(r'^subjects/$', subjects_list, name='show_subjects'),
+    path('delete_subject/<int:subject_id>', show_delete_subject, name='show_delete_subject'),
+    re_path(r'^create_new_subject/$', add_subject_form, name='add_subject_form'),
 ]

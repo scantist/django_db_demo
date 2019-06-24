@@ -1,20 +1,21 @@
 from django.shortcuts import render
-from django_db_demo.controller.crud_subject import query_all_info, insert
+from django_db_demo.controller.crud_subject import query_all_info, insert, delete_subject
 from .forms import SubjectFrom
 from django.http import HttpResponseRedirect
 
 
-def show_subjects(request):
+def subjects_list(request):
     subjects = query_all_info
     context = {'subject_list': subjects}
     return render(request, 'list_subjects.html', context)
 
 
-def show_delete_subject(request):
-    pass
+def show_delete_subject(request, subject_id):
+    delete_subject(subject_id)
+    return HttpResponseRedirect('/subjects/')
 
 
-def show_add_subject_form(request):
+def add_subject_form(request):
     if request.method == 'POST':
         subject_form = SubjectFrom(request.POST)
 
