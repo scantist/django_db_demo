@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>Save Subject</title>
+		<title>Save Component</title>
 
 	</head>
 
@@ -15,18 +15,18 @@
 		</div>
 
 		<div id="container">
-			<h3>Save Subject</h3>
+			<h3>Save Component</h3>
 
             <form action="" method="post">
                 {% csrf_token %}
                 <table>
                     {{ form }}
                 </table>
-                <input type="submit" value="Save Subject">
+                <input type="submit" value="Save Component">
             </form>
 
 			<p>
-				<a href="{% url 'show_subjects' %}">Back to List</a>
+				<a href="{% url 'show_component_list' subject_id%}">Back to List</a>
 			</p>
 		</div>
 	</body>

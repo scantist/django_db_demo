@@ -4,9 +4,8 @@ from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 
 
-# TODO: 稍后加入参数
 ''' insert new Subject W'''
-def insert(name, **kwargs):
+def insert_subject(name, **kwargs):
     if 'description' in kwargs:
         s1 = Subject(name=name, description=kwargs['description'],
                      created=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
@@ -35,8 +34,13 @@ def query_has_same_name(name):
         return False
 
 
+''' query specific subject by id '''
+def query_id(subject_id):
+    return Subject.objects.get(subject_id=subject_id)
+
+
 ''' update subject's basic info '''
-def update(subject_id, **kwargs):
+def update_subject(subject_id, **kwargs):
     subject = Subject.objects.get(subject_id=subject_id)
 
     for key, value in kwargs.items():
