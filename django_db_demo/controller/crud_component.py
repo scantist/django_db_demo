@@ -1,6 +1,7 @@
 from django_db_demo.model.models import Component, Subject
 import time
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils import timezone
 
 
 ''' insert new Component'''
@@ -32,6 +33,7 @@ def query_components_by_subject(subject_id):
     components = subject.component_set.all()
     return components
 
+
 def has_same_component_name(name):
     try:
         Component.objects.get(name=name)
@@ -39,7 +41,16 @@ def has_same_component_name(name):
     except ObjectDoesNotExist:
         return False
 
+
 def delete_component_by_id(component_id):
     component = Component.objects.get(component_id=component_id)
     component.delete()
     print(">>>>>>>> delete success!")
+
+
+def update_component(component_id, name, version):
+    component = Component.objects.get(component_id=component_id)
+    component.name = name
+    component.version = version
+    component.modified = timezone.now()
+    component.save()

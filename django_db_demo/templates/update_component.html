@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<title>Update Component</title>
+
+	</head>
+
+	<body>
+
+		<div id="wrapper">
+			<div id="header">
+				<h2>SRM - Subject Relationship Manager</h2>
+			</div>
+		</div>
+
+		<div id="container">
+			<h3>Update Component</h3>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <table>
+                    {{ form }}
+                </table>
+                <input type="submit" value="Update Component">
+            </form>
+
+			<p>
+				<a href="{% url 'show_component_list' subject_id%}">Back to List</a>
+			</p>
+		</div>
+	</body>
+</html>

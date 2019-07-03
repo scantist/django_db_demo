@@ -52,7 +52,6 @@ def update_subject(subject_id, **kwargs):
             raise Exception('Unexpected field when update subject: ', key)
 
     subject.modified = timezone.now()
-    print(timezone.now())
     subject.save()
 
 

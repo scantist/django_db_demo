@@ -16,7 +16,7 @@ Including another URLconf
 from django.urls import re_path, path
 from django_db_demo.view.views import subjects_list, show_delete_subject, show_add_subject_form, \
                                       show_update_subject_form, show_component_list, show_add_component_form,\
-                                      show_delete_component
+                                      show_delete_component, show_update_component
 
 urlpatterns = [
     re_path(r'^subjects/$', subjects_list, name='show_subjects'),
@@ -25,5 +25,7 @@ urlpatterns = [
     path('update_subject/<int:subject_id>', show_update_subject_form, name='update_subject_form'),
     path('components/<int:subject_id>', show_component_list, name='show_component_list'),
     path('create_new_component/<int:subject_id>', show_add_component_form, name='add_component_form'),
-    path('delete_component/<int:component_id>', show_delete_component, name='show_delete_component')
+    path('delete_component/<int:component_id>', show_delete_component, name='show_delete_component'),
+    re_path(r'^update_component/(?P<component_id>\d+)/(?P<subject_id>\d+)/$', show_update_component,
+            name='show_update_component'),
 ]

@@ -49,7 +49,7 @@
                         <td>{{ component.modified}}</td>
 						<td>
 							<!--display the update link-->
-							<a>Update</a>
+							<a href="{% url 'show_update_component' component.component_id  subject_id%}">Update</a>
 							|
 							<a href="{% url 'show_delete_component' component.component_id%}"
 							   onclick="if(!(confirm('Are you sure you want to delete this component?'))) return false">Delete</a>

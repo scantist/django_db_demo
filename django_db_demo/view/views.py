@@ -2,10 +2,10 @@ from django.shortcuts import render, reverse
 from django_db_demo.controller.crud_subject import query_all_info, insert_subject, delete_subject, query_id, \
                                                     update_subject
 from django_db_demo.controller.crud_component import query_components_info, query_components_by_subject, insert,\
-                                                     delete_component_by_id, query_component
-from .forms import SubjectForm, UpdateSubjectForm, ComponentForm
+                                                     delete_component_by_id, query_component, update_component
+from .forms import SubjectForm, UpdateSubjectForm, ComponentForm, UpdateComponentForm
 from django.http import HttpResponseRedirect
-
+from django.urls import reverse
 
 ''' Subject '''
 def subjects_list(request):
@@ -91,4 +91,24 @@ def show_delete_component(request, component_id):
     subject_id = query_component(component_id).subject_id_fk.subject_id
     delete_component_by_id(component_id)
     return HttpResponseRedirect('/components/' + str(subject_id))
+
+
+def show_update_component(request, component_id, subject_id):
+    component = query_component(component_id)
+
+    if request.method == 'POST':
+        update_component_form = UpdateComponentForm(request.POST, component_name='', component_version='')
+
+        if update_component_form.is_valid():
+            name = update_component_form.cleaned_data['name']
+            version = update_component_form.cleaned_data['version']
+
+            update_component(component_id, name, version)
+
+            url = reverse('show_component_list', args=subject_id)
+            return HttpResponseRedirect(url)
+    else:
+        update_component_form = UpdateComponentForm(component_name=component.name, component_version=component.version)
+
+    return render(request, 'update_component.html', {'form': update_component_form, 'subject_id': subject_id})
 
