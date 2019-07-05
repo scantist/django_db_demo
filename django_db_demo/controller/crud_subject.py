@@ -26,10 +26,15 @@ def query_all_info():
 
 
 ''' query if the name already exists, the name should be unique '''
-def query_has_same_name(name):
+def query_has_same_name(name, subject_id=-1):
     try:
-        Subject.objects.get(name=name)
-        return True
+        subject = Subject.objects.get(name=name)
+
+        # not modify the subject's name
+        if subject.subject_id == subject_id:
+            return False
+        else:
+            return True
     except ObjectDoesNotExist:
         return False
 
@@ -40,18 +45,13 @@ def query_id(subject_id):
 
 
 ''' update subject's basic info '''
-def update_subject(subject_id, **kwargs):
+def update_subject(subject_id, name, description=''):
     subject = Subject.objects.get(subject_id=subject_id)
 
-    for key, value in kwargs.items():
-        if key == 'name':
-            subject.name = value
-        elif key == 'description':
-            subject.description = value
-        else:
-            raise Exception('Unexpected field when update subject: ', key)
-
+    subject.name = name
+    subject.description = description
     subject.modified = timezone.now()
+
     subject.save()
 
 

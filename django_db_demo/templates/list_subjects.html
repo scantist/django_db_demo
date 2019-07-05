@@ -59,7 +59,7 @@
                                 <summary tabindex="-1"><a href="{% url 'show_component_list' subject.subject_id%}">Components</a></summary>
                                 <dl>
                                     {% for component in subject.component_set.all %}
-                                        <dd><a href="{% url 'show_delete_subject' subject.subject_id%}">{{ component.name }}</a></dd>
+                                        <dd><a href="{% url 'show_vulnerability_list' component.component_id subject.subject_id%}">{{ component.name }}</a></dd>
                                     {% endfor %}
                                 </dl>
                             </details>

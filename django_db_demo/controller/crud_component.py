@@ -5,7 +5,7 @@ from django.utils import timezone
 
 
 ''' insert new Component'''
-def insert(name, version, subject_id_fk):
+def insert_component(name, version, subject_id_fk):
     s1 = Component(name=name,
                    version=version,
                    created=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),

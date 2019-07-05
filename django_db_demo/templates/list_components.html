@@ -55,13 +55,23 @@
 							   onclick="if(!(confirm('Are you sure you want to delete this component?'))) return false">Delete</a>
 						</td>
 
+                        <td>
+                            <details>
+                                <summary tabindex="-1"><a href="{% url 'show_vulnerability_list' component.component_id subject_id%}">Vulnerabilities</a></summary>
+                                <dl>
+                                    {% for vulnerability in component.vulnerability_set.all %}
+                                        <dd>{{ vulnerability.name }}</dd>
+                                    {% endfor %}
+                                </dl>
+                            </details>
+                        </td>
 					</tr>
                 {% endfor %}
 
 			</table>
 
             <p>
-				<a href="{% url 'show_subjects'%}">Back to List</a>
+				<a href="{% url 'show_subjects'%}">Back to Subject List</a>
 			</p>
 		</div>
 	</div>
